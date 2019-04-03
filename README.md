@@ -1,14 +1,46 @@
 # convex_bottom_navigation
 
-Botton navigation with convex items
+Bottom navigation with convex items
 
-## Getting Started
+## How to use
 
-This project is a starting point for a Dart
-[package](https://flutter.io/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+```
+ConvexBottomNavigation fn = ConvexBottomNavigation(
+      tabs: [
+        TabData(icon: Icon(Icons.home), title: "Home"),
+        TabData(icon: Icon(Icons.menu), title: "Menu")
+      ],
+      onTabChangedListener: (position) {},
+    );
+```
+Or, for example:
+```
+ConvexBottomNavigation(
+      activeIconColor: colorPrimaryDark,
+      inactiveIconColor: Colors.grey,
+      textColor: colorPrimaryDark,
+      bigIconPadding: 10.0,
+      tabs: [
+        TabData(
+            icon: Image(
+              image: AssetImage("assets/ic_speaker.png"),
+            ),
+            title: "Feed"),
+        TabData(
+            icon: Image(
+              image: AssetImage("assets/ic_profile.png"),
+            ),
+            title: "Profile")
+      ],
+      onTabChangedListener: (position) {
+        setState(() {
+          _currentIndex = position;
+        });
+      },
+    );
+```
+See documentation to get information about all parameters
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+### Screenshots
+
+![](https://raw.githubusercontent.com/mishatron/ConvexBottomNavigation/master/assets/screenshot1.gif)

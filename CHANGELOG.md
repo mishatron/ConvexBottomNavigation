@@ -9,3 +9,7 @@
 ## [0.0.3] - 03.04.2019
 
 * improved color settings
+
+## [0.0.4] - 03.04.2019
+
+* added documentation and screenshot
