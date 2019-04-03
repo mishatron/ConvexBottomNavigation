@@ -1,3 +1,7 @@
-## [0.0.1] - TODO: Add release date.
+## [0.0.1] - 03.04.2019
 
-* TODO: Describe initial release.
+* ConvexBottomNavigation
+
+## [0.0.2] - 03.04.2019
+
+* homepage and file format
