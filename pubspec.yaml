@@ -2,7 +2,7 @@ name: convex_bottom_navigation
 description: Botton navigation with convex items
 version: 0.0.1
 author: Mishatron
-homepage: https://github.com/mishatron
+homepage: https://github.com/mishatron/ConvexBottomNavigation
 
 environment:
   sdk: ">=2.0.0-dev.68.0 <3.0.0"
