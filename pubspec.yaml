@@ -1,8 +1,8 @@
 name: convex_bottom_navigation
 description: Botton navigation with convex items
 version: 0.0.1
-author:
-homepage:
+author: Mishatron
+homepage: https://github.com/mishatron
 
 environment:
   sdk: ">=2.0.0-dev.68.0 <3.0.0"
@@ -10,6 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  vector_math: any
 
 dev_dependencies:
   flutter_test:
