@@ -81,25 +81,37 @@ class ConvexBottomNavigationState extends State<ConvexBottomNavigation>
 
     activeIcon = widget.tabs[currentSelected].icon;
 
-    circleColor ??= (Theme.of(context).brightness == Brightness.dark)
+    circleColor = (widget.circleColor == null)
+        ? (Theme.of(context).brightness == Brightness.dark)
         ? Colors.white
-        : Theme.of(context).primaryColor;
+        : Theme.of(context).primaryColor
+        : widget.circleColor;
 
-    activeIconColor ??= (Theme.of(context).brightness == Brightness.dark)
+    activeIconColor = (widget.activeIconColor == null)
+        ? (Theme.of(context).brightness == Brightness.dark)
         ? Colors.black54
-        : Colors.white;
+        : Colors.white
+        : widget.activeIconColor;
 
-    barBackgroundColor ??= (Theme.of(context).brightness == Brightness.dark)
+    barBackgroundColor = (widget.barBackgroundColor == null)
+        ? (Theme.of(context).brightness == Brightness.dark)
         ? Color(0xFF212121)
-        : Colors.white;
-    textColor ??= (Theme.of(context).brightness == Brightness.dark)
+        : Colors.white
+        : widget.barBackgroundColor;
+    textColor = (widget.textColor == null)
+        ? (Theme.of(context).brightness == Brightness.dark)
         ? Colors.white
-        : Colors.black54;
-    inactiveIconColor ??= (Theme.of(context).brightness == Brightness.dark)
+        : Colors.black54
+        : widget.textColor;
+    inactiveIconColor = (widget.inactiveIconColor == null)
+        ? (Theme.of(context).brightness == Brightness.dark)
         ? Colors.white
-        : Theme.of(context).primaryColor;
+        : Theme.of(context).primaryColor
+        : widget.inactiveIconColor;
 
+    smallIconPadding = widget.smallIconPadding;
     smallIconPadding ??= 6.0;
+    bigIconPadding = widget.bigIconPadding;
     bigIconPadding ??= 5.0;
   }
 
