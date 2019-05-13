@@ -3,7 +3,6 @@ import 'package:vector_math/vector_math.dart';
 
 /// HalfPainter is used for drawing convex items
 class HalfPainter extends CustomPainter {
-
   ///Constructor
   ///Requires [paintColor]
   HalfPainter(Color paintColor) {
@@ -17,7 +16,7 @@ class HalfPainter extends CustomPainter {
     final Rect beforeRect = Rect.fromLTWH(0, (size.height / 2) - 10, 10, 10);
     final Rect largeRect = Rect.fromLTWH(10, 0, size.width - 20, 70);
     final Rect afterRect =
-    Rect.fromLTWH(size.width - 10, (size.height / 2) - 10, 10, 10);
+        Rect.fromLTWH(size.width - 10, (size.height / 2) - 10, 10, 10);
 
     final path = Path();
     path.arcTo(beforeRect, radians(0), radians(90), false);

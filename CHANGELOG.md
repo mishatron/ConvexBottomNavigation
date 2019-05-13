@@ -13,3 +13,7 @@
 ## [0.0.4] - 03.04.2019
 
 * added documentation and screenshot
+
+## [1.0.0] - 13.05.2019
+
+* fixed formatting, improved description, added example, release version 
