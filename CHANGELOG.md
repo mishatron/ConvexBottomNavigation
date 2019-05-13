@@ -17,3 +17,7 @@
 ## [1.0.0] - 13.05.2019
 
 * fixed formatting, improved description, added example, release version 
+
+## [1.1.0] - 13.05.2019
+
+* fixed conflict with Future, customizable convex item

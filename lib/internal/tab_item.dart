@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const double ICON_OFF = -3;
+const double ICON_OFF = 0;
 const double ICON_ON = 0;
 const double TEXT_OFF = 3;
 const double TEXT_ON = 1;
@@ -32,10 +32,6 @@ class TabItem extends StatelessWidget {
   final Color activeIconColor;
   final Color inactiveIconColor;
 
-  final double iconYAlign = ICON_ON;
-  final double textYAlign = TEXT_OFF;
-  final double iconAlpha = ALPHA_ON;
-
   final double iconPadding;
 
   @override
@@ -48,7 +44,7 @@ class TabItem extends StatelessWidget {
             height: double.infinity,
             width: double.infinity,
             child: AnimatedAlign(
-                duration: Duration(milliseconds: ANIM_DURATION),
+                duration: const Duration(milliseconds: ANIM_DURATION),
                 alignment: Alignment(0, (selected) ? TEXT_ON : TEXT_OFF),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -69,13 +65,13 @@ class TabItem extends StatelessWidget {
               curve: Curves.easeIn,
               alignment: Alignment(0, (selected) ? ICON_OFF : ICON_ON),
               child: AnimatedOpacity(
-                duration: Duration(milliseconds: ANIM_DURATION),
+                duration: const Duration(milliseconds: ANIM_DURATION),
                 opacity: (selected) ? ALPHA_OFF : ALPHA_ON,
                 child: IconButton(
                   highlightColor: Colors.transparent,
                   splashColor: Colors.transparent,
-                  padding: EdgeInsets.all(0),
-                  alignment: Alignment(0, 0),
+                  padding: const EdgeInsets.all(0),
+                  alignment: Alignment.topCenter,
                   icon: Padding(
                     padding: EdgeInsets.all(iconPadding),
                     child: getIcon(),

@@ -28,6 +28,7 @@ class _MyAppState extends State<MyApp> {
       inactiveIconColor: Colors.grey,
       textColor: Colors.black,
       bigIconPadding: 15.0,
+      circleSize: CircleSize.SMALL,
       smallIconPadding: 10.0,
       circleColor: Colors.white,
       tabs: [

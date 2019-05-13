@@ -1,16 +1,20 @@
 library convex_bottom_navigation;
 
+import 'dart:async';
+
 import 'package:convex_bottom_navigation/internal/tab_item.dart';
 import 'package:convex_bottom_navigation/paint/half_clipper.dart';
 import 'package:convex_bottom_navigation/paint/half_painter.dart';
 import 'package:flutter/material.dart';
 
-const double CIRCLE_SIZE = 60;
-const double ARC_HEIGHT = 70;
 const double ARC_WIDTH = 90;
 const double CIRCLE_OUTLINE = 10;
 const double SHADOW_ALLOWANCE = 20;
 const double BAR_HEIGHT = 60;
+
+/// Enum that represents convex item size
+/// Value can be [SMALL] or [BIG]
+enum CircleSize { SMALL, BIG }
 
 /// Class ConvexBottomNavigation
 /// Can be used when you need to create convex items of bottom menu
@@ -21,9 +25,12 @@ class ConvexBottomNavigation extends StatefulWidget {
   ///[tabs] count should be in range of [2..4]
   ///You can customize [circleColor], [activeIconColor], [inactiveIconColor], [textColor], [barBackgroundColor],
   ///[smallIconPadding], [bigIconPadding] and [initialSelection]
+  ///
   ConvexBottomNavigation(
       {@required this.tabs,
       @required this.onTabChangedListener,
+      this.circleSize = CircleSize.SMALL,
+      this.bigIconOffsetY = -10,
       this.key,
       this.initialSelection = 0,
       this.circleColor,
@@ -48,6 +55,8 @@ class ConvexBottomNavigation extends StatefulWidget {
   final double smallIconPadding;
   final double bigIconPadding;
   final Key key;
+  final CircleSize circleSize;
+  final double bigIconOffsetY;
 
   @override
   ConvexBottomNavigationState createState() => ConvexBottomNavigationState();
@@ -73,6 +82,8 @@ class ConvexBottomNavigationState extends State<ConvexBottomNavigation>
   double smallIconPadding;
   double bigIconPadding;
 
+  double arcHeight;
+  double circleSize;
 
   /// There are default values in this method
   @override
@@ -83,30 +94,30 @@ class ConvexBottomNavigationState extends State<ConvexBottomNavigation>
 
     circleColor = (widget.circleColor == null)
         ? (Theme.of(context).brightness == Brightness.dark)
-        ? Colors.white
-        : Theme.of(context).primaryColor
+            ? Colors.white
+            : Theme.of(context).primaryColor
         : widget.circleColor;
 
     activeIconColor = (widget.activeIconColor == null)
         ? (Theme.of(context).brightness == Brightness.dark)
-        ? Colors.black54
-        : Colors.white
+            ? Colors.black54
+            : Colors.white
         : widget.activeIconColor;
 
     barBackgroundColor = (widget.barBackgroundColor == null)
         ? (Theme.of(context).brightness == Brightness.dark)
-        ? Color(0xFF212121)
-        : Colors.white
+            ? Color(0xFF212121)
+            : Colors.white
         : widget.barBackgroundColor;
     textColor = (widget.textColor == null)
         ? (Theme.of(context).brightness == Brightness.dark)
-        ? Colors.white
-        : Colors.black54
+            ? Colors.white
+            : Colors.black54
         : widget.textColor;
     inactiveIconColor = (widget.inactiveIconColor == null)
         ? (Theme.of(context).brightness == Brightness.dark)
-        ? Colors.white
-        : Theme.of(context).primaryColor
+            ? Colors.white
+            : Theme.of(context).primaryColor
         : widget.inactiveIconColor;
 
     smallIconPadding = widget.smallIconPadding;
@@ -118,6 +129,9 @@ class ConvexBottomNavigationState extends State<ConvexBottomNavigation>
   @override
   void initState() {
     super.initState();
+
+    circleSize = (widget.circleSize == CircleSize.SMALL) ? 30 : 40;
+    arcHeight = (widget.circleSize == CircleSize.SMALL) ? 50 : 70;
     _setSelected(widget.tabs[widget.initialSelection].key);
   }
 
@@ -169,14 +183,14 @@ class ConvexBottomNavigationState extends State<ConvexBottomNavigation>
           ),
         ),
         Positioned.fill(
-          top: -(CIRCLE_SIZE + CIRCLE_OUTLINE + SHADOW_ALLOWANCE) / 2,
+          top: -(circleSize + CIRCLE_OUTLINE + SHADOW_ALLOWANCE) / 2,
           child: Container(
             child: AnimatedAlign(
-              duration: Duration(milliseconds: ANIM_DURATION),
+              duration: const Duration(milliseconds: ANIM_DURATION),
               curve: Curves.easeOut,
               alignment: Alignment(_circleAlignX, 1),
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 15),
+                padding: const EdgeInsets.only(bottom: 20),
                 child: FractionallySizedBox(
                   widthFactor: 1 / widget.tabs.length,
                   child: GestureDetector(
@@ -186,16 +200,15 @@ class ConvexBottomNavigationState extends State<ConvexBottomNavigation>
                       children: <Widget>[
                         SizedBox(
                           height:
-                              CIRCLE_SIZE + CIRCLE_OUTLINE + SHADOW_ALLOWANCE,
-                          width:
-                              CIRCLE_SIZE + CIRCLE_OUTLINE + SHADOW_ALLOWANCE,
+                              circleSize + CIRCLE_OUTLINE + SHADOW_ALLOWANCE,
+                          width: circleSize + CIRCLE_OUTLINE + SHADOW_ALLOWANCE,
                           child: ClipRect(
                               clipper: HalfClipper(),
                               child: Container(
                                 child: Center(
                                   child: Container(
-                                      width: CIRCLE_SIZE + CIRCLE_OUTLINE,
-                                      height: CIRCLE_SIZE + CIRCLE_OUTLINE,
+                                      width: circleSize + CIRCLE_OUTLINE,
+                                      height: circleSize + CIRCLE_OUTLINE,
                                       decoration: BoxDecoration(
                                           color: Colors.white,
                                           shape: BoxShape.circle,
@@ -208,27 +221,30 @@ class ConvexBottomNavigationState extends State<ConvexBottomNavigation>
                               )),
                         ),
                         SizedBox(
-                            height: ARC_HEIGHT,
+                            height: arcHeight,
                             width: ARC_WIDTH,
                             child: CustomPaint(
                               painter: HalfPainter(barBackgroundColor),
                             )),
-                        SizedBox(
-                          height: CIRCLE_SIZE,
-                          width: CIRCLE_SIZE,
-                          child: Container(
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle, color: circleColor),
-                            child: Padding(
-                              padding: const EdgeInsets.all(0.0),
-                              child: AnimatedOpacity(
-                                  duration: Duration(
-                                      milliseconds: ANIM_DURATION ~/ 5),
-                                  opacity: _circleIconAlpha,
-                                  child: Padding(
-                                    padding: EdgeInsets.all(bigIconPadding),
-                                    child: activeIcon,
-                                  )),
+                        Transform.translate(
+                          offset: Offset(0, widget.bigIconOffsetY),
+                          child: SizedBox(
+                            height: circleSize,
+                            width: ARC_WIDTH,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle, color: circleColor),
+                              child: Padding(
+                                padding: const EdgeInsets.all(0.0),
+                                child: AnimatedOpacity(
+                                    duration: Duration(
+                                        milliseconds: ANIM_DURATION ~/ 5),
+                                    opacity: _circleIconAlpha,
+                                    child: Padding(
+                                      padding: EdgeInsets.all(bigIconPadding),
+                                      child: activeIcon,
+                                    )),
+                              ),
                             ),
                           ),
                         )
@@ -270,7 +286,6 @@ class ConvexBottomNavigationState extends State<ConvexBottomNavigation>
     });
   }
 }
-
 
 /// Class for setting tabs info
 class TabData {

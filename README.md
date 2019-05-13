@@ -19,6 +19,7 @@ ConvexBottomNavigation(
       activeIconColor: colorPrimaryDark,
       inactiveIconColor: Colors.grey,
       textColor: colorPrimaryDark,
+      circleSize: CircleSize.BIG,
       bigIconPadding: 10.0,
       tabs: [
         TabData(
