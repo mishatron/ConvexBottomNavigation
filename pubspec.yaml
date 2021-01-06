@@ -1,11 +1,10 @@
 name: convex_bottom_navigation
 description: An animated Bottom Navigation Bar for Flutter apps with convex items. Children (icons, images) animates into place. Colors are customizable.
-version: 1.1.0
-author: Mishatron <mishatron98@gmail.com>
+version: 1.1.1
 homepage: https://github.com/mishatron/ConvexBottomNavigation
 
 environment:
-  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+  sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
   flutter:

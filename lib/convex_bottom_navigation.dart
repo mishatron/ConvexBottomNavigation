@@ -150,14 +150,16 @@ class ConvexBottomNavigationState extends State<ConvexBottomNavigation>
   @override
   Widget build(BuildContext context) {
     return Stack(
-      overflow: Overflow.visible,
+      clipBehavior: Clip.none,
       alignment: Alignment.bottomCenter,
       children: <Widget>[
         Container(
           height: BAR_HEIGHT,
           decoration: BoxDecoration(color: barBackgroundColor, boxShadow: [
-            BoxShadow(
-                color: Colors.black12, offset: Offset(0, -1), blurRadius: 8)
+            const BoxShadow(
+                color: Colors.black12,
+                offset: const Offset(0, -1),
+                blurRadius: 8)
           ]),
           child: Row(
             mainAxisSize: MainAxisSize.max,
@@ -209,11 +211,11 @@ class ConvexBottomNavigationState extends State<ConvexBottomNavigation>
                                   child: Container(
                                       width: circleSize + CIRCLE_OUTLINE,
                                       height: circleSize + CIRCLE_OUTLINE,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                           color: Colors.white,
                                           shape: BoxShape.circle,
                                           boxShadow: [
-                                            BoxShadow(
+                                            const BoxShadow(
                                                 color: Colors.black12,
                                                 blurRadius: 8)
                                           ])),
